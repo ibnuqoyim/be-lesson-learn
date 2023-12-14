@@ -1,6 +1,7 @@
 import { Elysia, t } from "elysia";
 import { BooksDatabase } from "./db.js";
 import { html } from '@elysiajs/html'
+import { listen } from "bun";
 
 new Elysia()
   .use(html())
@@ -11,7 +12,7 @@ new Elysia()
   .post(
     "/books",
     async ({ db, body }) => {
-      const id = (await db.addBook(body)).id
+      const id = (await db.addBook(body))
       return { success: true, id };
     },
     {
@@ -49,5 +50,9 @@ new Elysia()
     } catch (e) {
       return { success: false };
     }
+  })
+  .get("books/:id", ({db, params}) => {
+      console.log(process.env.name)
+      return db.getBook(parseInt(params.id))
   })
   .listen(3000);
