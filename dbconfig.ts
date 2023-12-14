@@ -1,9 +1,8 @@
 // dbconfig.ts
 export const dbConfig = {
-    host: 'localhost',
-    port: 32768,
-    user: 'root',
-    password: 'mariadbpw',
-    database: 'erp',
+    host: Bun.env.dbhost,
+    user: Bun.env.dbuser,
+    password: Bun.env.dbpassword,
+    database: Bun.env.dbdatabase,
   };
   
